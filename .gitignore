@@ -1,0 +1,207 @@
+# ============================================================================
+# .gitignore para Proyecto de Machine Learning - Regresión Ordinal
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Entornos Virtuales de Python
+# ----------------------------------------------------------------------------
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+virtualenv/
+.conda/
+
+# ----------------------------------------------------------------------------
+# Archivos de Python Compilados
+# ----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribución / Empaquetado
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ----------------------------------------------------------------------------
+# Jupyter Notebook
+# ----------------------------------------------------------------------------
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# ----------------------------------------------------------------------------
+# IDEs y Editores
+# ----------------------------------------------------------------------------
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ----------------------------------------------------------------------------
+# Archivos del Sistema Operativo
+# ----------------------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ----------------------------------------------------------------------------
+# Archivos de Modelos y Datos (opcional - descomentar si son muy grandes)
+# ----------------------------------------------------------------------------
+# Modelos entrenados
+*.pkl
+*.h5
+*.hdf5
+*.joblib
+*.model
+models/trained/
+saved_models/
+
+# Datos procesados o temporales (mantener el CSV original)
+# data/processed/
+# data/temp/
+*.parquet
+*.feather
+
+# ----------------------------------------------------------------------------
+# Logs y Archivos Temporales
+# ----------------------------------------------------------------------------
+*.log
+logs/
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+
+# ----------------------------------------------------------------------------
+# Archivos de Configuración Local
+# ----------------------------------------------------------------------------
+.env
+.env.local
+config.local.py
+settings.local.py
+
+# ----------------------------------------------------------------------------
+# Archivos de Resultados y Reportes Generados
+# ----------------------------------------------------------------------------
+
+# Mantener los reportes importantes (como 01_reporte_caracterizacion.txt)
+# pero ignorar los temporales
+results/temp/
+reports/temp/
+
+# ----------------------------------------------------------------------------
+# Archivos de Testing y Coverage
+# ----------------------------------------------------------------------------
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+*.cover
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# ----------------------------------------------------------------------------
+# Archivos de Machine Learning Específicos
+# ----------------------------------------------------------------------------
+# TensorFlow / Keras
+*.pb
+*.tflite
+checkpoints/
+
+# PyTorch
+*.pth
+*.pt
+
+# Weights & Biases
+wandb/
+
+# MLflow
+mlruns/
+
+# ----------------------------------------------------------------------------
+# Archivos de Documentación Generada
+# ----------------------------------------------------------------------------
+docs/_build/
+docs/.doctrees/
+*.pdf (excepto los importantes como el PDF del proyecto)
+
+# ----------------------------------------------------------------------------
+# Archivos de Base de Datos
+# ----------------------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+
+# ----------------------------------------------------------------------------
+# Archivos de Compresión
+# ----------------------------------------------------------------------------
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# ----------------------------------------------------------------------------
+# Notas y Archivos Personales
+# ----------------------------------------------------------------------------
+notes.txt
+TODO.txt
+personal_notes/
+scratch/
+
