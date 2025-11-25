@@ -1,0 +1,75 @@
+[1mdiff --git a/03_entrenamiento_modelos.ipynb b/03_entrenamiento_modelos.ipynb[m
+[1mindex c375b13..d7a1bfe 100644[m
+[1m--- a/03_entrenamiento_modelos.ipynb[m
+[1m+++ b/03_entrenamiento_modelos.ipynb[m
+[36m@@ -896,6 +896,63 @@[m
+     "results_df_display = results_df[['modelo', 'params', 'cv_mae_mean', 'cv_mae_ci', 'cv_accuracy_mean', 'cv_accuracy_ci', 'cv_spearman_mean', 'cv_spearman_ci', 'test_mae', 'test_acc']]\n",[m
+     "results_df_display\n"[m
+    ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "markdown",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "## 7. Importancia de variables por modelo\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "Usamos `permutation_importance` sobre el conjunto de test para estimar la sensibilidad de cada modelo a cada variable. Las caídas de `test_accuracy` al permutar una característica revelan su importancia real en la decisión final.\n"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 1,[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "ename": "NameError",[m
+[32m+[m[32m     "evalue": "name 'data_train' is not defined",[m
+[32m+[m[32m     "output_type": "error",[m
+[32m+[m[32m     "traceback": [[m
+[32m+[m[32m      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",[m
+[32m+[m[32m      "\u001b[1;31mNameError\u001b[0m                                 Traceback (most recent call last)",[m
+[32m+[m[32m      "Cell \u001b[1;32mIn[1], line 3\u001b[0m\n\u001b[0;32m      1\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01msklearn\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01minspection\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m permutation_importance\n\u001b[1;32m----> 3\u001b[0m feature_names \u001b[38;5;241m=\u001b[39m \u001b[43mdata_train\u001b[49m\u001b[38;5;241m.\u001b[39mcolumns\u001b[38;5;241m.\u001b[39mtolist()\n\u001b[0;32m      4\u001b[0m importance_by_model \u001b[38;5;241m=\u001b[39m {}\n\u001b[0;32m      6\u001b[0m \u001b[38;5;28;01mfor\u001b[39;00m name, estimator \u001b[38;5;129;01min\u001b[39;00m best_models\u001b[38;5;241m.\u001b[39mitems():\n",[m
+[32m+[m[32m      "\u001b[1;31mNameError\u001b[0m: name 'data_train' is not defined"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "from sklearn.inspection import permutation_importance\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "feature_names = data_train.columns.tolist()\n",[m
+[32m+[m[32m    "importance_by_model = {}\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "for name, estimator in best_models.items():\n",[m
+[32m+[m[32m    "    result = permutation_importance(\n",[m
+[32m+[m[32m    "        estimator,\n",[m
+[32m+[m[32m    "        data_val,\n",[m
+[32m+[m[32m    "        y_test,\n",[m
+[32m+[m[32m    "        n_repeats=10,\n",[m
+[32m+[m[32m    "        scoring='accuracy',\n",[m
+[32m+[m[32m    "        random_state=42,\n",[m
+[32m+[m[32m    "        n_jobs=-1\n",[m
+[32m+[m[32m    "    )\n",[m
+[32m+[m[32m    "    importance_by_model[name] = pd.Series(result.importances_mean, index=feature_names).sort_values(ascending=False)\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "importance_summary = pd.concat([\n",[m
+[32m+[m[32m    "    imp.head(5).rename(\"importance\").reset_index().assign(model=name)\n",[m
+[32m+[m[32m    "    for name, imp in importance_by_model.items()\n",[m
+[32m+[m[32m    "], ignore_index=True)[[\"model\", \"feature\", \"importance\"]]\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "print('Top 5 variables por modelo (permutation importance sobre test):')\n",[m
+[32m+[m[32m    "for name, importance in importance_by_model.items():\n",[m
+[32m+[m[32m    "    print(f'\\n{name}:')\n",[m
+[32m+[m[32m    "    print(importance.head(5).to_string())\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "importance_summary\n"[m
+[32m+[m[32m   ][m
+   }[m
+  ],[m
+  "metadata": {[m
+[36m@@ -919,4 +976,4 @@[m
+  },[m
+  "nbformat": 4,[m
+  "nbformat_minor": 2[m
+[31m-}[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
