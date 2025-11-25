@@ -339,3 +339,6 @@ test_score = best_model.score(X_test, y_test)
 
 **En resumen**: Para tu proyecto, **NO necesitas validation set separado** porque la validación cruzada hace todo lo que necesitas y lo hace mejor con datasets de tu tamaño. 🎯
 
+
+
+

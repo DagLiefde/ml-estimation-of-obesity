@@ -230,3 +230,6 @@ R: Máximo 10 páginas. Es mejor tener 9 páginas bien escritas que 11 páginas 
 
 Siguiente paso recomendado: **Crear el script de preprocesamiento**
 
+
+
+

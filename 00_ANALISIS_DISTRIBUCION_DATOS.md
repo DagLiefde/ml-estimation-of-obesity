@@ -167,3 +167,6 @@ Esto nos da:
 
 ¿Procedemos con 70-0-30?
 
+
+
+

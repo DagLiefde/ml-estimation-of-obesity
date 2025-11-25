@@ -101,3 +101,6 @@ El IMC es:
 
 **Recomendación final**: Implementar IMC y eliminar Weight y Height.
 
+
+
+
