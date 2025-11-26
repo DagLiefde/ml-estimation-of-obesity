@@ -1,265 +1,59 @@
-# 🏥 Clasificación de Niveles de Obesidad - Regresión Ordinal
+# ML Estimation of Obesity
 
-Proyecto de Modelos II: Predicción de niveles de obesidad a partir de hábitos alimenticios y condiciones físicas usando Machine Learning.
+## Propósito
+Este repositorio implementa una solución reproducible para **clasificar niveles de obesidad ordinal (7 clases)** usando datos de hábitos alimentarios y estilo de vida. Se enfoca en:
 
-**Problema**: Regresión Ordinal con 7 clases ordenadas de niveles de obesidad
+- **Entender el dataset** con EDA y controles de desbalance.
+- **Preprocesar** con encoding, scaler y guardado de transformadores.
+- **Entrenar y comparar** múltiples modelos con validación cruzada orientada a métricas ordinales.
+- **Analizar reducción de dimensión** (PCA, t-SNE, UMAP) y documentar decisiones.
 
----
+## Requisitos
 
-## 📋 Descripción del Proyecto
+1. Python 3.10+ y las dependencias descritas en `requirements.txt` (crea si aún no existe).
+2. Ejecuta `pip install -r requirements.txt`.
 
-Este proyecto implementa modelos de Machine Learning para clasificar niveles de obesidad usando regresión ordinal. El dataset contiene información sobre hábitos alimenticios, actividad física y características físicas de individuos.
+## Estrategia de uso
 
-**Clases de Obesidad** (ordenadas):
-1. Insufficient_Weight
-2. Normal_Weight
-3. Overweight_Level_I
-4. Overweight_Level_II
-5. Obesity_Type_I
-6. Obesity_Type_II
-7. Obesity_Type_III
+1. **Análisis Exploratorio (notebook 01)**  
+   - Abre `01_analisis_exploratorio.ipynb` y corre las celdas para revisar distribución de clases, IMC y visualizaciones.
+2. **Preprocesamiento (notebook 02)**  
+   - Ejecuta todo el notebook `02_preprocesamiento.ipynb`.  
+   - Genera `data/processed/*.csv` y `models/preprocessing/*.pkl` que se usarán después.
+3. **Entrenamiento y evaluación (notebook 03)**  
+   - Corre `03_entrenamiento_modelos.ipynb` en su totalidad.  
+   - Usa los CSV y transformadores guardados para entrenar los modelos, registrar métricas (MAE ordinal, accuracy, Spearman) y guardar figuras en `results/figuras/`.
+4. **Reducción de dimensión (notebook 04)**  
+   - Ejecuta `04_reduccion_dimension.ipynb` para probar PCA y UMAP.  
+   - La sección final genera tabulado resumido en `results/tablas/reduction_comparison.csv`.
 
----
-
-## 🚀 Inicio Rápido
-
-### 1. Instalación de Dependencias
-
-```bash
-# Crear entorno virtual (si no existe)
-python3 -m venv venv
-
-# Activar entorno virtual
-source venv/bin/activate  # En macOS/Linux
-# o
-venv\Scripts\activate  # En Windows
-
-# Instalar dependencias
-pip install pandas numpy matplotlib seaborn scikit-learn jupyter
-```
-
-### 2. Orden de Ejecución de Notebooks
-
-**⚠️ IMPORTANTE**: Ejecuta los notebooks en el siguiente orden:
-
-#### 📊 **Notebook 1: Análisis Exploratorio**
-```bash
-01_analisis_exploratorio.ipynb
-```
-**¿Qué hace?**
-- Carga y explora el dataset original
-- Analiza la distribución de clases de obesidad
-- Identifica problemas de desbalance
-- Genera visualizaciones y reportes
-
-**Tiempo estimado**: 2-3 minutos
-
----
-
-#### 🔧 **Notebook 2: Preprocesamiento**
-```bash
-02_preprocesamiento.ipynb
-```
-**¿Qué hace?**
-- Calcula IMC (Índice de Masa Corporal) a partir de Weight y Height
-- Codifica variables categóricas (Label Encoding + One-Hot Encoding)
-- Estandariza variables numéricas
-- Divide datos en Train (70%) y Test (30%) con estratificación
-- Guarda datos preprocesados y transformadores
-
-**⚠️ Requisito**: Debe ejecutarse después del Notebook 1
-
-**Tiempo estimado**: 1-2 minutos
-
-**Archivos generados**:
-- `data/processed/X_train.csv`, `X_test.csv`
-- `data/processed/y_train.csv`, `y_test.csv`
-- `models/preprocessing/*.pkl` (transformadores)
-
----
-
-#### 🤖 **Notebook 3: Entrenamiento de Modelos** (Próximamente)
-```bash
-03_entrenamiento_modelos.ipynb
-```
-**¿Qué hace?**
-- Entrena y evalúa 6 modelos diferentes:
-  1. Regresión Logística Ordinal
-  2. k-NN
-  3. Random Forest
-  4. Gradient Boosting
-  5. Red Neuronal (MLP)
-  6. SVM
-- Optimiza hiperparámetros con validación cruzada
-- Compara resultados entre modelos
-
-**⚠️ Requisito**: Debe ejecutarse después del Notebook 2
-
----
-
-#### 📉 **Notebook 4: Reducción de Dimensión** (Próximamente)
-```bash
-04_reduccion_dimension.ipynb
-```
-**¿Qué hace?**
-- Análisis individual de variables (correlación, importancia)
-- Aplica PCA (Análisis de Componentes Principales)
-- Aplica UMAP (reducción no lineal)
-- Compara resultados con y sin reducción
-
-**⚠️ Requisito**: Debe ejecutarse después del Notebook 3
-
----
-
-#### 📊 **Notebook 5: Evaluación Final** (Próximamente)
-```bash
-05_evaluacion_final.ipynb
-```
-**¿Qué hace?**
-- Compila todos los resultados
-- Genera reportes finales
-- Crea visualizaciones comparativas
-- Selecciona el mejor modelo
-
-**⚠️ Requisito**: Debe ejecutarse después del Notebook 4
-
----
-
-## 📁 Estructura del Repositorio
+## Organización del repositorio
 
 ```
 ml-estimation-of-obesity/
-├── README.md                          # Este archivo
-├── LICENSE                            # Licencia MIT
-│
-├── notebooks/                         # Jupyter notebooks (próximamente)
-│   ├── 01_analisis_exploratorio.ipynb
-│   ├── 02_preprocesamiento.ipynb
-│   ├── 03_entrenamiento_modelos.ipynb
-│   ├── 04_reduccion_dimension.ipynb
-│   └── 05_evaluacion_final.ipynb
-│
-├── data/
-│   ├── ObesityDataSet_raw_and_data_sinthetic.csv  # Dataset original
-│   └── processed/                     # Datos preprocesados
-│       ├── X_train.csv
-│       ├── X_test.csv
-│       ├── y_train.csv
-│       └── y_test.csv
-│
-├── models/
-│   └── preprocessing/                 # Transformadores guardados
-│       ├── scaler.pkl
-│       ├── target_encoder.pkl
-│       └── label_encoders.pkl
-│
-├── results/
-│   ├── figuras/                       # Visualizaciones
-│   └── reportes/                      # Reportes generados
-│
-└── venv/                              # Entorno virtual (no versionar)
+├── data/processed/                 # Entradas preprocesadas (X_train/X_test y targets)
+├── models/preprocessing/           # Transformers guardados (scaler, encoders, info)
+├── results/figuras/                # Gráficas generadas (curvas, matriz de confusión)
+├── results/tablas/                 # Tablas summary (comparativas u otras)
+├── ml-estimation-of-obesity.pdf    # Paper
+├── 01_analisis_exploratorio.ipynb
+├── 02_preprocesamiento.ipynb
+├── 03_entrenamiento_modelos.ipynb
+├── 04_reduccion_dimension.ipynb
+└── README.md
 ```
 
----
+## Consejos para colaborar
 
-## 🔄 Flujo de Trabajo Completo
+- **Mantén consistencia**: no modifiques manualmente los CSV de `data/processed/` si el notebook de preprocesamiento los genera automáticamente.
+- **Guarda resultados**: si actualizas modelos, vuelve a correr la celda final del notebook 03 para refrescar `results/figuras/*`.
+- **Documenta conclusiones** en los notebooks o en un `docs/` adicional cuando tomes decisiones (por ejemplo, por qué se mantuvo PCA o qué clases quedaron peor).
 
-```
-1. 01_analisis_exploratorio.ipynb
-   ↓
-   [Explora datos, identifica problemas]
-   ↓
-2. 02_preprocesamiento.ipynb
-   ↓
-   [Prepara datos para modelado]
-   ↓
-3. 03_entrenamiento_modelos.ipynb
-   ↓
-   [Entrena y compara modelos]
-   ↓
-4. 04_reduccion_dimension.ipynb
-   ↓
-   [Reduce dimensionalidad, evalúa impacto]
-   ↓
-5. 05_evaluacion_final.ipynb
-   ↓
-   [Genera reportes finales]
-```
+## Cómo verificar
 
----
-
-## 📝 Notas Importantes
-
-### ⚠️ Orden de Ejecución
-- **NUNCA** ejecutes los notebooks fuera de orden
-- Cada notebook depende de los archivos generados por los anteriores
-- Si ejecutas un notebook sin los anteriores, obtendrás errores
-
-### 💾 Datos Preprocesados
-- Los datos preprocesados se guardan en `data/processed/`
-- Si ya ejecutaste el Notebook 2, puedes saltarlo en ejecuciones futuras
-- Los transformadores se guardan en `models/preprocessing/`
-
-### 🔄 Reproducibilidad
-- Todos los notebooks usan `random_state=42` para reproducibilidad
-- Los resultados deberían ser consistentes entre ejecuciones
-
----
-
-## 🛠️ Requisitos del Sistema
-
-- Python 3.8+
-- Jupyter Notebook o Jupyter Lab
-- 4GB+ RAM recomendado
-- Espacio en disco: ~100MB
-
----
-
-## 📚 Dependencias Principales
-
-- `pandas`: Manipulación de datos
-- `numpy`: Operaciones numéricas
-- `scikit-learn`: Machine Learning
-- `matplotlib` / `seaborn`: Visualizaciones
-- `jupyter`: Notebooks interactivos
-
----
-
-## 👥 Autores
-
-- Tomás Cadavid Martínez
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
-
----
-
-## 📖 Documentación Adicional
-
-- `00_PLANIFICACION_PROYECTO.md`: Planificación completa del proyecto
-- `00_RESUMEN_EJECUTIVO.md`: Resumen ejecutivo y checklist
-- `00_ANALISIS_IMC.md`: Análisis sobre el uso de IMC
-- `00_VALIDACION_CRUZADA_VS_VALIDATION_SET.md`: Explicación de metodología
-
----
-
-## 🆘 Solución de Problemas
-
-### Error: "ModuleNotFoundError"
-- Asegúrate de haber activado el entorno virtual
-- Instala las dependencias: `pip install -r requirements.txt` (si existe)
-
-### Error: "FileNotFoundError"
-- Verifica que ejecutaste los notebooks en orden
-- Asegúrate de estar en el directorio raíz del proyecto
-
-### Error: "Data already exists"
-- Los datos preprocesados ya existen, puedes continuar con el siguiente notebook
-- O elimina `data/processed/` para regenerar
-
----
-
-**Última actualización**: 2025
+1. Ejecuta los notebooks en orden (`01` → `02` → `03` → `04`).
+2. Verifica que:
+   - `data/processed/` contiene los CSV esperados.
+   - `models/preprocessing/` tiene los pickle del scaler y encoders.
+   - `results/figuras/` contiene las gráficas (curvas, matriz, comparativa).
+   - `results/tablas/reduction_comparison.csv` se actualizó después del notebook 04.
