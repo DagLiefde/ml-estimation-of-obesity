@@ -1,6 +1,0 @@
-modelo,GradientBoosting,GradientBoosting,SVM,SVM
-,accuracy,mae,accuracy,mae
-reduccion,,,,
-Original,0.9716,0.0473,0.8785,0.3438
-PCA,0.8391,0.4148,0.8691,0.3785
-UMAP,0.664,0.9685,0.541,1.3328
